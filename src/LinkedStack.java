@@ -11,7 +11,6 @@ public class LinkedStack<T> implements StackInterface<T>{
     public void push(T newEntry) {
         Node newNode = new Node(newEntry, topNode);
         topNode = newNode;
-
     }
 
     @Override
@@ -38,63 +37,35 @@ public class LinkedStack<T> implements StackInterface<T>{
     }
 
     @Override
-    public void clear() {
-        topNode == null;
+    public void clear(){
+        topNode = null;
     }
+
     // implementation of the interface
     private class Node {
         private T data;
         private Node next;
 
 
-        public Node(T newEntry, Node topNode) {
+    public Node(T newEntry, Node atopNode){
+        next = atopNode;
+        data = newEntry;
 
-        }
-
-        public Node getNextNode() {
-
-        }
-
-        public T getData(){
-        }
-    }
     }
 
+    public Node getNextNode(){
+        return next;
 
+    }
+    public Node setNextNode(){
+        return next;
 
-        // constructors and get and set methods
+    }
 
+    public T getData(){
+        return data;
+    }
 
-
-    /*
-        private Node(T dataPortion){
-            this(dataPortion, null);
-        }
-        private Node(T dataPortion, Node nextNode){
-            data = dataPortion;
-            next = nextNode;
-        }
-
-
-        private T getData(){
-            return data;
-        }
-
-
-        private void setData(T newData){
-            data = newData;
-        }
-
-
-        private Node getNextNode(){
-            return next;
-        }
-
-
-
-        private void setNextNode(Node nextNode){
-            next = nextNode;
-         */
 
     }
 }
