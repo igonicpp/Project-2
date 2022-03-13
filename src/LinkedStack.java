@@ -1,3 +1,4 @@
+import java.util.EmptyStackException;
 
 public class LinkedStack<T> implements StackInterface<T>{
     private Node topNode;
@@ -18,7 +19,6 @@ public class LinkedStack<T> implements StackInterface<T>{
        T top = peek();
        topNode = topNode.getNextNode();
        return top;
-
     }
 
     @Override
@@ -55,11 +55,9 @@ public class LinkedStack<T> implements StackInterface<T>{
 
     public Node getNextNode(){
         return next;
-
     }
     public Node setNextNode(){
         return next;
-
     }
 
     public T getData(){
