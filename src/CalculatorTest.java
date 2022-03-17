@@ -1,10 +1,4 @@
-import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.runner.JUnitCore;
-import org.junit.runner.Result;
-import org.junit.runner.notification.Failure;
 import org.junit.Before;
 
 import java.util.EmptyStackException;
@@ -12,7 +6,7 @@ import java.util.EmptyStackException;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-public class ArrayStackTest {
+public class CalculatorTest {
 
     StackInterface arrayStack = new ResizableArrayStack();
 
