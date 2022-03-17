@@ -18,7 +18,7 @@ public class ResizableArrayStack<T> implements StackInterface<T>{
         integrityOK = false;
         checkCapacity(initialCapacity);
 
-        @SupressWarnings("unchecked")
+        @SuppressWarnings("unchecked")
         T[] tempStack = (T[]) new Object[initialCapacity];
         stack = tempStack;
         topIndex = 1;
@@ -48,8 +48,9 @@ public class ResizableArrayStack<T> implements StackInterface<T>{
     @Override
     public T pop() {
         checkIntegrity();
-        if(isEmpty)
-            throw new EmptyStackEXception();
+
+        if(isEmpty())
+            throw new EmptyStackException();
         else{
             T top = stack[topIndex];
             stack[topIndex] = null;
@@ -82,4 +83,19 @@ public class ResizableArrayStack<T> implements StackInterface<T>{
         }
 
     }
+    private void checkIntegrity(){
+        if (!integrityOK){
+            throw new SecurityException("ArrayStack object is corrupt.");
+        }
+    }
+    private void checkCapacity(int capacity)
+    {
+        if (capacity > MAX_CAPACITY)
+            throw new IllegalStateException("Attempt to create a stack whose " +
+                    "capacity exeeds allowed " +
+                    "maximum of " + MAX_CAPACITY);
+    }
+
+
+
 }
