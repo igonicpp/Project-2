@@ -66,4 +66,54 @@ public class LinkedStack<T> implements StackInterface<T>{
 
 
     }
+    public String toPostFix(String infix){
+        LinkedStack<Character> stack = new LinkedStack<Character>();
+        String postfix = "";
+        String copyInfix = infix;
+        char nextCharacter;
+        char topOperator;
+        while(copyInfix.length() > 0){
+            nextCharacter = copyInfix.charAt(0);
+            if(copyInfix.length() > 1){
+                copyInfix = copyInfix.substring(1);
+            }
+            if(copyInfix.length() == 1){
+                copyInfix = "";
+            }
+            switch(nextCharacter){
+                case 'a': case 'b': case 'c': case 'd': case 'e':case 'f':case 'g':case 'h':case 'i':case 'j':
+                case 'k':case 'l':case 'm':case 'n':case 'o':case 'p':case 'q':case 'r':case 's':case 't':case 'u':
+                case 'v':case 'w':case 'x':case 'y':case 'z':
+                    postfix += nextCharacter;
+                    break;
+                case '^':
+                    stack.push(nextCharacter);
+                    break;
+                case '+': case '-': case '*': case '/':
+                    while(!stack.isEmpty() && stack.peek() == '^'){
+                        postfix += nextCharacter;
+                        stack.pop();
+                    }
+                    stack.push(nextCharacter);
+                    break;
+                case '(':
+                    stack.push(nextCharacter);
+                    break;
+                case ')':
+                    topOperator = stack.pop();
+                    while(topOperator != '('){
+                        postfix += topOperator;
+                        topOperator = stack.pop();
+                    }
+                    break;
+                default: break;
+            }
+        }
+        while(!stack.isEmpty()){
+            topOperator = stack.pop();
+            postfix += topOperator;
+        }
+
+        return postfix;
+    }
 }
