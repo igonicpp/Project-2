@@ -89,7 +89,7 @@ public class LinkedStack<T> implements StackInterface<T>{
         }
         return precedence;
     }
-    public String toPostFix(String infix){
+    public static String toPostFix(String infix){
         LinkedStack<Character> stack = new LinkedStack<Character>();
         String postfix = "";
         String copyInfix = infix;
