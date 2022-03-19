@@ -106,30 +106,30 @@ public class ResizableArrayStack<T> implements StackInterface<T>{
             if(copyPostFix.length() > 1){
                 copyPostFix = copyPostFix.substring(1);
             }
-            if(copyPostFix.length() == 1){
+            else if(copyPostFix.length() == 1){
                 copyPostFix = "";
             }
             switch(nextCharacter){
                 case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8':case '9':
-                    stack.push((double) nextCharacter);
+                    stack.push(Double.parseDouble(String.valueOf(nextCharacter)));
                     break;
                 case'+': case'-': case '*': case '/': case '^':
                     operandOne = stack.pop();
                     operandTwo = stack.pop();
                     if(nextCharacter == '+'){
-                        result = (double) (operandOne + operandTwo);
+                        result = (operandTwo + operandOne);
                     }
                     if(nextCharacter == '-'){
-                        result = (double) (operandOne - operandTwo);
+                        result =  (operandTwo - operandOne);
                     }
                     if(nextCharacter == '*'){
-                        result = (double) (operandOne * operandTwo);
+                        result = (operandTwo * operandOne);
                     }
                     if(nextCharacter == '/'){
-                        result = (double) (operandOne / operandTwo);
+                        result =  (operandTwo / operandOne);
                     }
                     if(nextCharacter == '^'){
-                        result = (double) (Math.pow(operandOne, operandTwo));
+                        result =  (Math.pow(operandTwo, operandOne));
                     }
                     stack.push(result);
                     break;
