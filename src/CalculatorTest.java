@@ -9,6 +9,7 @@ import static org.junit.Assert.fail;
 public class CalculatorTest {
 
     StackInterface arrayStack = new ResizableArrayStack();
+    StackInterface linkedStack = new LinkedStack();
 
     /**
      * Initializes an ArrayStack to use.
@@ -40,6 +41,21 @@ public class CalculatorTest {
         } catch (Exception e){
             fail("Failure: push() threw an exception: " + e);
         }
+        try {
+            linkedStack.push("a");
+        } catch (Exception e){
+            fail("Failure: push() threw an exception: " + e);
+        }
+        try {
+            linkedStack.push("b");
+        } catch (Exception e){
+            fail("Failure: push() threw an exception: " + e);
+        }
+        try {
+            linkedStack.push(null);
+        } catch (Exception e){
+            fail("Failure: push() threw an exception: " + e);
+        }
     }
 
     /**
@@ -60,6 +76,17 @@ public class CalculatorTest {
         arrayStack.push("2ndEntry");
         assertEquals("2ndEntry", arrayStack.pop());
         assertEquals("1stEntry", arrayStack.pop());
+
+        try {
+            linkedStack.pop();
+            fail("Failure: Successfully pop into an empty bag.");
+        } catch (EmptyStackException e){
+            assertEquals(EmptyStackException.class, e.getClass());
+        }
+        linkedStack.push("1stEntry");
+        linkedStack.push("2ndEntry");
+        assertEquals("2ndEntry", linkedStack.pop());
+        assertEquals("1stEntry", linkedStack.pop());
     }
 
     /**
@@ -77,6 +104,15 @@ public class CalculatorTest {
         }
         arrayStack.push("a");
         assertEquals("a", arrayStack.peek());
+
+        try {
+            linkedStack.peek();
+            fail("Failure: Successfully peeked into an empty bag.");
+        } catch (EmptyStackException e){
+            assertEquals(EmptyStackException.class, e.getClass());
+        }
+        linkedStack.push("a");
+        assertEquals("a", linkedStack.peek());
     }
 
     /**
@@ -89,6 +125,10 @@ public class CalculatorTest {
         assertEquals(true, arrayStack.isEmpty());
         arrayStack.push("a");
         assertEquals(false, arrayStack.isEmpty());
+
+        assertEquals(true, linkedStack.isEmpty());
+        linkedStack.push("a");
+        assertEquals(false, linkedStack.isEmpty());
     }
 
     /**
@@ -103,6 +143,20 @@ public class CalculatorTest {
         arrayStack.push("a");
         arrayStack.clear();
         assertEquals(true, arrayStack.isEmpty());
+
+        linkedStack.clear();
+        assertEquals(true, linkedStack.isEmpty());
+        linkedStack.push("a");
+        linkedStack.clear();
+        assertEquals(true, linkedStack.isEmpty());
+    }
+
+    /**
+     *  This tests the conversion to postfix expression
+     */
+    @Test
+    public void testConvertToPostFix(){
+        assertEquals("ab*ca-d/e*+",LinkedStack.toPostFix("a*b/(c-a)+d*e"));
     }
 
     /**
@@ -110,7 +164,7 @@ public class CalculatorTest {
      */
     @Test
     public void testEvaluatePostFix(){
-
+        assertEquals(33.0,ResizableArrayStack.evaluatePostFix("2*3/(4-2)+5*6"),1E-9);
     }
 
 

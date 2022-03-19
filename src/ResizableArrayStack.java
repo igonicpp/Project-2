@@ -96,7 +96,7 @@ public class ResizableArrayStack<T> implements StackInterface<T>{
                     "maximum of " + MAX_CAPACITY);
     }
 
-    public double evaluatePostFix(String postfix){
+    public static double evaluatePostFix(String postfix){
         ResizableArrayStack<Double> stack = new ResizableArrayStack<Double>();
         char nextCharacter;
         double operandOne;
