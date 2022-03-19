@@ -156,6 +156,9 @@ public class CalculatorTest {
      */
     @Test
     public void testConvertToPostFix(){
+        assertEquals("ab+", LinkedStack.toPostFix("a+b"));
+        assertEquals("ab+c*", LinkedStack.toPostFix("a+b)*c"));
+        assertEquals("abc*+", LinkedStack.toPostFix("a+b*c"));
         assertEquals("ab-c+", LinkedStack.toPostFix("a-b+c"));
         assertEquals("abc^^", LinkedStack.toPostFix("a^b^c"));
         assertEquals("ab/cde-+*", LinkedStack.toPostFix("a/b*(c+(d-e))"));
@@ -167,6 +170,7 @@ public class CalculatorTest {
      */
     @Test
     public void testEvaluatePostFix(){
+        assertEquals(0.5,ResizableArrayStack.evaluatePostFix("24/"),1E-9);
         assertEquals(2,ResizableArrayStack.evaluatePostFix("24+3/"),1E-9);
         assertEquals(33.0,ResizableArrayStack.evaluatePostFix("2*3/(4-2)+5*6"),1E-9);
     }
