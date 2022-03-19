@@ -65,7 +65,7 @@ public class ResizableArrayStack<T> implements StackInterface<T>{
         if(isEmpty())
             throw new EmptyStackException();
         else return stack[topIndex];
-        
+
     }
 
     @Override
@@ -76,7 +76,7 @@ public class ResizableArrayStack<T> implements StackInterface<T>{
     @Override
     public void clear() {
         checkIntegrity();
-        
+
         while(topIndex > -1){
             stack[topIndex] = null;
             topIndex--;
@@ -91,9 +91,7 @@ public class ResizableArrayStack<T> implements StackInterface<T>{
     private void checkCapacity(int capacity)
     {
         if (capacity > MAX_CAPACITY)
-            throw new IllegalStateException("Attempt to create a stack whose " +
-                    "capacity exeeds allowed " +
-                    "maximum of " + MAX_CAPACITY);
+            throw new IllegalStateException("Attempt to create a stack whose " + "capacity exceeds allowed " + "maximum of " + MAX_CAPACITY);
     }
 
     public static double evaluatePostFix(String postfix){
@@ -112,7 +110,7 @@ public class ResizableArrayStack<T> implements StackInterface<T>{
                 copyPostFix = "";
             }
             switch(nextCharacter){
-                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8':case '9': 
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8':case '9':
                     stack.push((double) nextCharacter);
                     break;
                 case'+': case'-': case '*': case '/': case '^':
