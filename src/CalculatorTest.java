@@ -156,6 +156,7 @@ public class CalculatorTest {
      */
     @Test
     public void testConvertToPostFix(){
+        assertEquals("ab/cde-+*", LinkedStack.toPostFix("a/b*(c+(d-e))"));
         assertEquals("ab*ca-d/e*+",LinkedStack.toPostFix("a*b/(c-a)+d*e"));
     }
 
@@ -164,6 +165,7 @@ public class CalculatorTest {
      */
     @Test
     public void testEvaluatePostFix(){
+        assertEquals(2,ResizableArrayStack.evaluatePostFix("24+3/"),1E-9);
         assertEquals(33.0,ResizableArrayStack.evaluatePostFix("2*3/(4-2)+5*6"),1E-9);
     }
 
