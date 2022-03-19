@@ -96,6 +96,51 @@ public class ResizableArrayStack<T> implements StackInterface<T>{
                     "maximum of " + MAX_CAPACITY);
     }
 
+    public double evaluatePostFix(String postfix){
+        ResizableArrayStack<Double> stack = new ResizableArrayStack<Double>();
+        char nextCharacter;
+        double operandOne;
+        double operandTwo;
+        double result = 0.0;
+        String copyPostFix = postfix;
+        while(copyPostFix.length() > 0){
+            nextCharacter = copyPostFix.charAt(0);
+            if(copyPostFix.length() > 1){
+                copyPostFix = copyPostFix.substring(1);
+            }
+            if(copyPostFix.length() == 1){
+                copyPostFix = "";
+            }
+            switch(nextCharacter){
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8':case '9': 
+                    stack.push((double) nextCharacter);
+                    break;
+                case'+': case'-': case '*': case '/': case '^':
+                    operandOne = stack.pop();
+                    operandTwo = stack.pop();
+                    if(nextCharacter == '+'){
+                        result = (double) (operandOne + operandTwo);
+                    }
+                    if(nextCharacter == '-'){
+                        result = (double) (operandOne - operandTwo);
+                    }
+                    if(nextCharacter == '*'){
+                        result = (double) (operandOne * operandTwo);
+                    }
+                    if(nextCharacter == '/'){
+                        result = (double) (operandOne / operandTwo);
+                    }
+                    if(nextCharacter == '^'){
+                        result = (double) (Math.pow(operandOne, operandTwo));
+                    }
+                    stack.push(result);
+                    break;
+                default: break;
+            }
+        }
+        return stack.peek();
+    }
+
 
 
 }
