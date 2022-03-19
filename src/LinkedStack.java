@@ -76,6 +76,7 @@ public class LinkedStack<T> implements StackInterface<T>{
                 else{
                     precedence = true;
                 }
+                break;
             case '*': case'/':
                 if(b == '^'){
                     precedence = false;
@@ -83,9 +84,12 @@ public class LinkedStack<T> implements StackInterface<T>{
                 else{
                     precedence = true;
                 }
+                break;
             case '^':
                 precedence = true;
+                break;
             default: precedence = false;
+            break;
         }
         return precedence;
     }
@@ -100,7 +104,7 @@ public class LinkedStack<T> implements StackInterface<T>{
             if(copyInfix.length() > 1){
                 copyInfix = copyInfix.substring(1);
             }
-            if(copyInfix.length() == 1){
+            else {
                 copyInfix = "";
             }
             switch(nextCharacter){
@@ -114,7 +118,7 @@ public class LinkedStack<T> implements StackInterface<T>{
                     break;
                 case '+': case '-': case '*': case '/':
                     while(!stack.isEmpty() && checkPrecedence(stack.peek(), nextCharacter)){
-                        postfix += nextCharacter;
+                        postfix += stack.peek();
                         stack.pop();
                     }
                     stack.push(nextCharacter);
