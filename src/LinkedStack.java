@@ -66,7 +66,28 @@ public class LinkedStack<T> implements StackInterface<T>{
 
 
     }
-    public static String toPostFix(String infix){
+    private static boolean checkPrecedence(char a, char b){
+        boolean precedence = false;
+        switch(a){
+            case '+': case'-':
+                if(b == '^' || b == '*' || b == '/'){
+                    precedence = false;
+                }
+                else{
+                    precedence = true;
+                }
+            case '*': case'/':
+                if(b == '^'){
+                    precedence = false;
+                }
+                else{
+                    precedence = true;
+                }
+            default: precedence = false;
+        }
+        return precedence;
+    }
+    public String toPostFix(String infix){
         LinkedStack<Character> stack = new LinkedStack<Character>();
         String postfix = "";
         String copyInfix = infix;
@@ -90,7 +111,7 @@ public class LinkedStack<T> implements StackInterface<T>{
                     stack.push(nextCharacter);
                     break;
                 case '+': case '-': case '*': case '/':
-                    while(!stack.isEmpty() && stack.peek() == '^'){
+                    while(!stack.isEmpty() && checkPrecedence(nextCharacter, stack.peek())){
                         postfix += nextCharacter;
                         stack.pop();
                     }
