@@ -14,7 +14,9 @@ public class Calculator {
 
     }
 
-
+    /**
+     * JUnit test calling upon methods in CalculatorTest.class. Prints out failures. If Successful, prints out successful = true message.
+     */
     public static void testCalculator(){
         Result result = JUnitCore.runClasses(CalculatorTest.class);
         for (Failure failure : result.getFailures()){
