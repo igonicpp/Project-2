@@ -3,11 +3,18 @@ import java.util.EmptyStackException;
 public class LinkedStack<T> implements StackInterface<T>{
     private Node topNode;
 
+    /**
+     * Default constructor with default node null.
+     */
+
     public LinkedStack(){
         topNode = null;
     }
 
-// implementation of the interface
+    /**
+     * copy Constructor
+     */
+
     @Override
     public void push(T newEntry) {
         Node newNode = new Node(newEntry, topNode);
@@ -27,8 +34,6 @@ public class LinkedStack<T> implements StackInterface<T>{
             throw new EmptyStackException();
         else
             return topNode.getData();
-
-
     }
 
     @Override
@@ -41,31 +46,42 @@ public class LinkedStack<T> implements StackInterface<T>{
         topNode = null;
     }
 
-    // implementation of the interface
+
     private class Node {
         private T data;
         private Node next;
 
-
+        /**
+         * @param newEntry newEntry object in the stack.
+         * @param atopNode references the first node in the chain.
+         */
     public Node(T newEntry, Node atopNode){
         next = atopNode;
         data = newEntry;
 
     }
-
+        /**
+         * Gets next node
+         * @return the current node points to. Null if last node.
+         */
     public Node getNextNode(){
         return next;
     }
+        /**
+         * Sets the next node of the current node.
+         * @return Return to the next which is atopNode;
+         */
     public Node setNextNode(){
         return next;
     }
-
+        /**
+         * @return Returns the data the node has.
+         */
     public T getData(){
         return data;
     }
-
-
     }
+
     private static boolean checkPrecedence(char a, char b){
         boolean precedence = false;
         switch(a){

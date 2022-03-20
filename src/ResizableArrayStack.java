@@ -14,6 +14,9 @@ public class ResizableArrayStack<T> implements StackInterface<T>{
         this(DEFAULT_CAPACITY);
     }
 
+    /**
+     * The cast is safe because new Array contains null entries.
+     */
     public ResizableArrayStack(int initialCapacity){
         integrityOK = false;
         checkCapacity(initialCapacity);
@@ -25,9 +28,9 @@ public class ResizableArrayStack<T> implements StackInterface<T>{
         integrityOK = true;
     }
 
-
-
-    //interfaces methods
+    /**
+     * copy constructor
+     */
 
 
     @Override
@@ -36,13 +39,6 @@ public class ResizableArrayStack<T> implements StackInterface<T>{
         ensureCapacity();
         stack[topIndex + 1] = newEntry;
         topIndex++;
-    }
-    private void ensureCapacity(){
-        if(topIndex >= stack.length -1){
-            int newLength = 2 * stack.length;
-            checkCapacity(newLength);
-            stack = Arrays.copyOf(stack, newLength);
-        }
     }
 
     @Override
@@ -83,11 +79,27 @@ public class ResizableArrayStack<T> implements StackInterface<T>{
         }
 
     }
+
+    /** Check the capacity the stack and if the stack is full it will give new length to the stack.*/
+    private void ensureCapacity() {
+        if (topIndex >= stack.length - 1) {
+            int newLength = 2 * stack.length;
+            checkCapacity(newLength);
+            stack = Arrays.copyOf(stack, newLength);
+        }
+    }
+    /**
+     * Simple check if the integrity of the stack is OK. Ensures that the stack is properly initialized with proper space.
+     */
     private void checkIntegrity(){
         if (!integrityOK){
             throw new SecurityException("ArrayStack object is corrupt.");
         }
     }
+    /**
+     * Checks to see if given capacity does not exceed set MAX_CAPACITY. Throws an exception if it exceeds.
+     * @param capacity Capacity to check if less than MAX_CAPACITY. If greater, throws an exception.
+     */
     private void checkCapacity(int capacity)
     {
         if (capacity > MAX_CAPACITY)
