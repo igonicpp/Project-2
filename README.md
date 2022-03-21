@@ -2,7 +2,7 @@ Iker Goni, Alex Mariano, Koki Yamaguchi
 
 Contributions
 
- Iker:
+ Iker: Created and finished the toPostfix method and evaluatePostFix method
  
  Alex:
  
