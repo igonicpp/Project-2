@@ -10,7 +10,8 @@ public class Calculator {
         System.out.println("Converting a*b/(c-a)+d*e into a postfix expression using LinkedStack.toPostFix()");
         System.out.println("LinkedStack.toPostFix(): " + LinkedStack.toPostFix("a*b/(c-a)+d*e"));
         System.out.println("Evaluating " + LinkedStack.toPostFix("a*b/(c-a)+d*e") + " for a = 2, b = 3, c = 4, d = 5, e = 6 using ResizableArrayStack.evaluatePostFix()");
-        System.out.println("ResizableArrayStack.evaluatePostFix(): " + ResizableArrayStack.evaluatePostFix("\"23*42-/56*+\""));
+        System.out.println("Substituted Values: 23*42-/56*+");
+        System.out.println("ResizableArrayStack.evaluatePostFix(): " + ResizableArrayStack.evaluatePostFix("23*42-/56*+"));
 
     }
 

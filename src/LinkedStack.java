@@ -55,31 +55,31 @@ public class LinkedStack<T> implements StackInterface<T>{
          * @param newEntry newEntry object in the stack.
          * @param atopNode references the first node in the chain.
          */
-    public Node(T newEntry, Node atopNode){
-        next = atopNode;
-        data = newEntry;
+        public Node(T newEntry, Node atopNode){
+            next = atopNode;
+            data = newEntry;
 
-    }
-        /**
-         * Gets next node
-         * @return the current node points to. Null if last node.
-         */
-    public Node getNextNode(){
-        return next;
-    }
-        /**
-         * Sets the next node of the current node.
-         * @return Return to the next which is atopNode;
-         */
-    public Node setNextNode(){
-        return next;
-    }
-        /**
-         * @return Returns the data the node has.
-         */
-    public T getData(){
-        return data;
-    }
+        }
+            /**
+             * Gets next node
+             * @return the current node points to. Null if last node.
+             */
+        public Node getNextNode(){
+            return next;
+        }
+            /**
+             * Sets the next node of the current node.
+             * @return Return to the next which is atopNode;
+             */
+        public Node setNextNode(){
+            return next;
+        }
+            /**
+             * @return Returns the data the node has.
+             */
+        public T getData(){
+            return data;
+        }
     }
 
     private static boolean checkPrecedence(char a, char b){
