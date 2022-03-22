@@ -105,7 +105,11 @@ public class ResizableArrayStack<T> implements StackInterface<T>{
         if (capacity > MAX_CAPACITY)
             throw new IllegalStateException("Attempt to create a stack whose " + "capacity exceeds allowed " + "maximum of " + MAX_CAPACITY);
     }
-
+    /**
+     * 
+     * @param postfix equation that must be solved 
+     * @return final value of the equation
+     */
     public static double evaluatePostFix(String postfix){
         ResizableArrayStack<Double> stack = new ResizableArrayStack<Double>();
         char nextCharacter;
@@ -113,19 +117,24 @@ public class ResizableArrayStack<T> implements StackInterface<T>{
         double operandTwo;
         double result = 0.0;
         String copyPostFix = postfix;
+        // while the length of the copy of postfix is greater than 0
         while(copyPostFix.length() > 0){
             nextCharacter = copyPostFix.charAt(0);
+            // checks if the length of the copy postfix equation is greater than 1
             if(copyPostFix.length() > 1){
                 copyPostFix = copyPostFix.substring(1);
             }
             else if(copyPostFix.length() == 1){
                 copyPostFix = "";
             }
+            // goes through possible cases for nextCharacter
             switch(nextCharacter){
+                // if the value is a number, push the double version of that value onto the stack
                 case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8':case '9':
                     stack.push(Double.parseDouble(String.valueOf(nextCharacter)));
                     break;
                 case'+': case'-': case '*': case '/': case '^':
+                // if the value is an operation, pop the two numbers from the stack and perform the required operation then push that value onto the stack
                     operandOne = stack.pop();
                     operandTwo = stack.pop();
                     if(nextCharacter == '+'){
@@ -148,6 +157,7 @@ public class ResizableArrayStack<T> implements StackInterface<T>{
                 default: break;
             }
         }
+        // returns the final value
         return stack.peek();
     }
 
