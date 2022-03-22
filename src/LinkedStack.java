@@ -81,7 +81,12 @@ public class LinkedStack<T> implements StackInterface<T>{
         return data;
     }
     }
-
+    /**
+     * Compares operations a and b to see if a has precedence over b
+     * @param a variable of interest
+     * @param b operation that is determines precedence of variable a
+     * @return boolean whether a has precedence over b or not
+     */
     private static boolean checkPrecedence(char a, char b){
         boolean precedence = false;
         switch(a){
@@ -109,12 +114,18 @@ public class LinkedStack<T> implements StackInterface<T>{
         }
         return precedence;
     }
+    /**
+     * converts infix equation into postfix
+     * @param infix infix equation that must be converted to postfix
+     * @return String postfix equation
+     */
     public static String toPostFix(String infix){
         LinkedStack<Character> stack = new LinkedStack<Character>();
         String postfix = "";
         String copyInfix = infix;
         char nextCharacter;
         char topOperator;
+        // while the copy of the infix equation String is greater than 0
         while(copyInfix.length() > 0){
             nextCharacter = copyInfix.charAt(0);
             if(copyInfix.length() > 1){
@@ -123,15 +134,19 @@ public class LinkedStack<T> implements StackInterface<T>{
             else {
                 copyInfix = "";
             }
+            // checks the next character of the infix equation 
             switch(nextCharacter){
+                // concatenates the letter onto the postfix variable
                 case 'a': case 'b': case 'c': case 'd': case 'e':case 'f':case 'g':case 'h':case 'i':case 'j':
                 case 'k':case 'l':case 'm':case 'n':case 'o':case 'p':case 'q':case 'r':case 's':case 't':case 'u':
                 case 'v':case 'w':case 'x':case 'y':case 'z':
                     postfix += nextCharacter;
                     break;
                 case '^':
+                // pushes onto the stack
                     stack.push(nextCharacter);
                     break;
+                // checks precedence of the letter in the stack if there is one, if there is and method returns true then add the first element in the stack to the postfix
                 case '+': case '-': case '*': case '/':
                     while(!stack.isEmpty() && checkPrecedence(stack.peek(), nextCharacter)){
                         postfix += stack.peek();
@@ -140,9 +155,11 @@ public class LinkedStack<T> implements StackInterface<T>{
                     stack.push(nextCharacter);
                     break;
                 case '(':
+                // pushes the next character onto the stack
                     stack.push(nextCharacter);
                     break;
                 case ')':
+                // pops all elements in the stack until beginning paranthesis is found
                     topOperator = stack.pop();
                     while(topOperator != '('){
                         postfix += topOperator;
@@ -152,6 +169,7 @@ public class LinkedStack<T> implements StackInterface<T>{
                 default: break;
             }
         }
+        // adds the remainder of the elements in the stack to the postfix equation
         while(!stack.isEmpty()){
             topOperator = stack.pop();
             postfix += topOperator;
